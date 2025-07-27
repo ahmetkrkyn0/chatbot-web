@@ -1,34 +1,85 @@
-body{
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
-.chat-container{
+
+.chat-container {
     width: 400px;
-    margin: 50px auto;
-    background: white;
-    padding: 10px;
+    max-width: 90vw;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
-    box-shadow: 0 0 10px #ccc;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
 }
-#chat-box{
-    height: 300px;
-    overflow-y: scroll;
+
+#chat-box {
+    height: 400px;
+    overflow-y: auto;
     border: 1px solid #ddd;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    margin-bottom: 15px;
+    scroll-behavior: smooth;
+}
+
+.user, .bot {
+    padding: 10px 15px;
     margin-bottom: 10px;
+    border-radius: 20px;
+    max-width: 80%;
+    word-wrap: break-word;
 }
-.user{
-    text-align: right;
-    color: blue;
+
+.user {
+    background-color: #4a90e2;
+    color: white;
+    align-self: flex-end;
+    box-shadow: 0 2px 8px rgba(74,144,226,0.3);
 }
-.bot{
-    text-align: left;
-    color: green;
+
+.bot {
+    background-color: #e5e5ea;
+    color: #333;
+    align-self: flex-start;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-#user-input{
-    width: 75%;
-    padding: 10px;
+
+#user-input {
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: calc(100% - 100px);
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
 }
+
+#user-input:focus {
+    border-color: #4a90e2;
+}
+
 button {
-    padding: 10px;
+    width: 80px;
+    margin-left: 10px;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357ABD;
 }
