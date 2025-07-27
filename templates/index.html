@@ -4,24 +4,114 @@
     <meta charset="UTF-8" />
     <title>Film Öneri Chatbot</title>
     <link rel="stylesheet" href="/static/style.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        #chat-box {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .user, .bot {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            position: relative;
+        }
+        .user {
+            background: #d0ebff;
+            text-align: right;
+        }
+        .bot {
+            background: #e5e5e5;
+            text-align: left;
+        }
+        .timestamp {
+            display: block;
+            font-size: 0.75em;
+            color: #777;
+            margin-top: 5px;
+        }
+        #user-input {
+            width: calc(100% - 90px);
+            height: 50px;
+            resize: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            width: 70px;
+            height: 50px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .loader {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #999;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-left: 5px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
 <div class="chat-container">
-    <div id="chat-box" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;"></div>
-    <input type="text" id="user-input" placeholder="Mesajınızı yazın..." />
-    <button onclick="sendMessage()">Gönder</button>
+    <div id="chat-box"></div>
+    <div style="display: flex;">
+        <textarea id="user-input" placeholder="Mesajınızı yazın..."></textarea>
+        <button onclick="sendMessage()">Gönder</button>
+    </div>
 </div>
 
 <script>
+    function getTimestamp() {
+        const now = new Date();
+        return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
     function sendMessage() {
         const input = document.getElementById("user-input");
         const message = input.value.trim();
         if (message === "") return;
 
         const chatBox = document.getElementById("chat-box");
-        chatBox.innerHTML += `<div class="user">Sen: ${message}</div>`;
+
+        // Kullanıcı mesajı
+        chatBox.innerHTML += `
+            <div class="user">
+                Sen: ${message}
+                <span class="timestamp">${getTimestamp()}</span>
+            </div>`;
+
         input.value = "";
 
+        // Bot cevabını beklerken loading animasyonu
+        const loadingId = "loading-" + Date.now();
+        chatBox.innerHTML += `
+            <div class="bot" id="${loadingId}">
+                Bot yazıyor <span class="loader"></span>
+            </div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Fetch ile mesaj gönder
         fetch("/get", {
             method: "POST",
             headers: {
@@ -31,15 +121,26 @@
         })
             .then(res => res.json())
             .then(data => {
-                chatBox.innerHTML += `<div class="bot">Bot: ${data.response}</div>`;
+                // Loading animasyonunu kaldır
+                const loadingDiv = document.getElementById(loadingId);
+                if (loadingDiv) loadingDiv.remove();
+
+                // Bot cevabı
+                chatBox.innerHTML += `
+                <div class="bot">
+                    Bot: ${data.response}
+                    <span class="timestamp">${getTimestamp()}</span>
+                </div>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
-            })
-            .catch(err => {
-                chatBox.innerHTML += `<div class="bot">Bot: Bir hata oluştu.</div>`;
-                chatBox.scrollTop = chatBox.scrollHeight;
-                console.error(err);
             });
     }
+
+    // Enter tuşu = yeni satır (Shift gerekmez)
+    document.getElementById("user-input").addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault(); // Form submit olmasın
+        }
+    });
 </script>
 </body>
 </html>

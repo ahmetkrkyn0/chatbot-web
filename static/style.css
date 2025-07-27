@@ -1,85 +1,112 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .chat-container {
-    width: 400px;
-    max-width: 90vw;
-    background-color: #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: #111111;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+    border: 1px solid #333;
 }
 
 #chat-box {
-    height: 400px;
+    max-height: 400px;
     overflow-y: auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    background-color: #f0f0f0;
-    margin-bottom: 15px;
-    scroll-behavior: smooth;
+    margin-bottom: 10px;
+    padding-right: 5px;
 }
 
 .user, .bot {
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-radius: 20px;
-    max-width: 80%;
-    word-wrap: break-word;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 10px;
+    position: relative;
+    line-height: 1.5;
+    max-width: 90%;
+    white-space: pre-wrap;
 }
 
 .user {
-    background-color: #4a90e2;
-    color: white;
+    background: linear-gradient(135deg, #222, #444);
+    color: #00ffff;
     align-self: flex-end;
-    box-shadow: 0 2px 8px rgba(74,144,226,0.3);
+    text-align: right;
+    margin-left: auto;
 }
 
 .bot {
-    background-color: #e5e5ea;
-    color: #333;
+    background: linear-gradient(135deg, #1a1a1a, #333);
+    color: #ffffff;
     align-self: flex-start;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: left;
+    margin-right: auto;
+}
+
+.timestamp {
+    display: block;
+    font-size: 0.75em;
+    color: #888;
+    margin-top: 6px;
 }
 
 #user-input {
-    padding: 12px 15px;
+    width: calc(100% - 90px);
+    height: 50px;
+    resize: none;
+    padding: 10px;
     font-size: 16px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    outline: none;
-    width: calc(100% - 100px);
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-#user-input:focus {
-    border-color: #4a90e2;
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 8px;
 }
 
 button {
-    width: 80px;
-    margin-left: 10px;
-    background-color: #4a90e2;
+    width: 70px;
+    height: 50px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #666, #999);
+    color: black;
     border: none;
-    border-radius: 20px;
-    color: white;
-    font-weight: 600;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #357ABD;
+    background: linear-gradient(135deg, #888, #bbb);
+}
+
+.loader {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #888;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-left: 5px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Scrollbar görünümü (isteğe bağlı) */
+#chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+#chat-box::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 10px;
+}
+#chat-box::-webkit-scrollbar-track {
+    background: #222;
 }
