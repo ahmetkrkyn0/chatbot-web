@@ -1,5 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+OMDB_API_KEY = os.getenv("OMDB_API_KEY")
 
 app = Flask(__name__)
 
@@ -14,7 +20,7 @@ def get_bot_response(message):
     else:
         return "Üzgünüm bunu anlayamadım."
 
-OMDB_API_KEY = "5d7d7304"
+
 
 def omdb_film_oner(tur="action"):
     url = f"http://www.omdbapi.com/?apikey={OMDB_API_KEY}&type=movie&s={tur}"

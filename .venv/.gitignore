@@ -1,0 +1,10 @@
+# Python cache dosyaları
+__pycache__/
+*.pyc
+
+# Ortam dosyası
+.env
+
+# IDE ayarları
+.idea/
+.vscode/
