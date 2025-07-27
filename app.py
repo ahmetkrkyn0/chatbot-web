@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+import requests
 
 app = Flask(__name__)
 
@@ -12,6 +13,21 @@ def get_bot_response(message):
         return "Görüşmek üzere!"
     else:
         return "Üzgünüm bunu anlayamadım."
+
+OMDB_API_KEY = "5d7d7304"
+
+def omdb_film_oner(tur="action"):
+    url = f"http://www.omdbapi.com/?apikey={OMDB_API_KEY}&type=movie&s={tur}"
+    response = requests.get(url)
+    data = response.json()
+
+    if data.get("Response") == "True":
+        filmler = [film["Title"] for film in data["Search"]]
+        return filmler
+    else:
+        return "Üzgünüm, şu anda öneri veremiyorum. Türü doğru girdiğinizden emin misin?"
+
+
 
 @app.route("/")
 def home():
