@@ -34,10 +34,15 @@ def home():
     return render_template("index.html")
 
 @app.route("/get", methods=["POST"])
-def chatbot_response():
-    user_message = request.json.get("message")
-    response = get_bot_response(user_message)
-    return jsonify({"response": response})
+def get_bot_response():
+    userText = request.form["msg"].lower()
+
+    for tur in ["action", "comedy", "horror", "romance", "drama", "sci-fi"]:
+        if tur in userText:
+            return omdb_film_oner(tur)
+
+    return "Hangi türde film istediğini belirtir misin? (örneğin: action, comedy)"
+
 
 if __name__ == "__main__":
     app.run(debug=True)
