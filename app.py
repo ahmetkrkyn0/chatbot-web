@@ -23,7 +23,7 @@ def omdb_film_oner(tur="action"):
 
     if data.get("Response") == "True":
         filmler = [film["Title"] for film in data["Search"]]
-        return filmler
+        return "İşte bazı {} filmleri: ".format(tur) + ", ".join(filmler)
     else:
         return "Üzgünüm, şu anda öneri veremiyorum. Türü doğru girdiğinizden emin misin?"
 
