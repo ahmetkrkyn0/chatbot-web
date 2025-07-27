@@ -1,7 +1,6 @@
 body {
-    background-color: #000000;
-    color: #ffffff;
-    font-family: 'Courier New', monospace;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
 }
@@ -9,11 +8,10 @@ body {
 .chat-container {
     max-width: 700px;
     margin: 50px auto;
-    background-color: #111111;
-    border-radius: 12px;
+    background-color: #ffffff;
+    border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
-    border: 1px solid #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #chat-box {
@@ -25,88 +23,45 @@ body {
 
 .user, .bot {
     margin: 10px 0;
-    padding: 12px;
+    padding: 10px;
     border-radius: 10px;
-    position: relative;
-    line-height: 1.5;
-    max-width: 90%;
-    white-space: pre-wrap;
+    max-width: 80%;
 }
 
 .user {
-    background: linear-gradient(135deg, #222, #444);
-    color: #00ffff;
+    background-color: #d1e7dd;
     align-self: flex-end;
     text-align: right;
     margin-left: auto;
 }
 
 .bot {
-    background: linear-gradient(135deg, #1a1a1a, #333);
-    color: #ffffff;
+    background-color: #f8d7da;
     align-self: flex-start;
     text-align: left;
     margin-right: auto;
 }
 
-.timestamp {
-    display: block;
-    font-size: 0.75em;
-    color: #888;
-    margin-top: 6px;
-}
-
 #user-input {
     width: calc(100% - 90px);
-    height: 50px;
-    resize: none;
     padding: 10px;
     font-size: 16px;
-    background-color: #1a1a1a;
-    color: white;
-    border: 1px solid #444;
-    border-radius: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 button {
     width: 70px;
-    height: 50px;
+    padding: 10px;
     font-size: 16px;
-    background: linear-gradient(135deg, #666, #999);
-    color: black;
+    background-color: #007bff;
+    color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
+    margin-left: 10px;
 }
 
 button:hover {
-    background: linear-gradient(135deg, #888, #bbb);
-}
-
-.loader {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border: 2px solid #888;
-    border-top: 2px solid transparent;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
-    margin-left: 5px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Scrollbar görünümü (isteğe bağlı) */
-#chat-box::-webkit-scrollbar {
-    width: 6px;
-}
-#chat-box::-webkit-scrollbar-thumb {
-    background: #555;
-    border-radius: 10px;
-}
-#chat-box::-webkit-scrollbar-track {
-    background: #222;
+    background-color: #0056b3;
 }
